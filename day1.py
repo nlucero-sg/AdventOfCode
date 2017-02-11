@@ -6,6 +6,7 @@ class Person:
     def __init__(self):
         self._dir = complex(0, 1)
         self._pos = complex(0, 0)
+        self.path = [self._pos]
 
     def turn(self, direction):
         if direction.upper() == "L":
@@ -16,7 +17,9 @@ class Person:
             raise ValueError("direction must be 'R' or 'L'")
 
     def walk(self,steps):
-        self._pos += steps*self._dir
+        for _ in range(steps):
+            self._pos += self._dir
+            self.path.append(self._pos)
 
     def getLocation(self):
         return self._pos.real, self._pos.imag
@@ -31,6 +34,26 @@ for instruction in input:
 
 print(p.getLocation())
 print(sum([abs(n) for n in p.getLocation()]))
+
+print("solution 2")
+
+p = Person()
+locations = set()
+
+for instruction in input:
+    turn = instruction[0]
+    steps = int(instruction[1:])
+    p.turn(turn)
+    p.walk(steps)
+    if len(set(p.path)) < len(p.path):
+        for item in p.path:
+            if p.path.count(item) > 1:
+                print(item)
+                print(abs(item.real)+abs(item.imag))
+                exit()
+
+
+
 
 
 
