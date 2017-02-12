@@ -65,4 +65,3 @@ for line in input:
     code += str(k.get_key())
 
 print(code)
-pass
