@@ -1,6 +1,5 @@
 import re
 
-
 def get_data(s):
     sector = re.findall('-(\d+)\[', s)[0]
     name = s[0:s.index(sector)].replace('-', '')
